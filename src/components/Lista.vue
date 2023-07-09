@@ -1,56 +1,70 @@
 <template>
   <div
-    style="width: 18rem"
-    class="card height-check"
-    :class="{ expanded: isExpanded }"
+    style="width: 90%"
+    class="card my-2"
+    :class="{
+      expanded: isExpanded,
+      'height-check': !isExpanded && shouldExpand,
+    }"
   >
-    <div class="card-header">Featured</div>
-    <div class="gradient-custom">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">
-          V Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in ex
-          et metus bibendum tincidunt. Aenean nibh nulla, sagittis id varius
-          eget, interdum sed odio. Phasellus nec ultrices arcu, a vestibulum
-          nisl. Phasellus ac ornare quam. Donec quis magna scelerisque, bibendum
-          purus a, finibus ex. Aenean ac tincidunt quam. Cras volutpat nibh
-          pharetra, dictum felis a, tristique orci. Morbi ligula metus, posuere
-          vel dictum eu, rutrum ac ante. Vestibulum dui arcu, rutrum eget ligula
-          maximus, sagittis tempor erat. Nullam a risus bibendum, bibendum urna
-          sed, pretium purus. Donec auctor ornare bibendum. Suspendisse ut
-          luctus mi, id suscipit eros. Sed ligula tellus, efficitur nec turpis
-          quis, dictum viverra libero. Pellentesque iaculis hendrerit neque,
-          vitae sagittis ni
-        </li>
-      </ul>
+    <div class="card-header row">
+      <span> NASLOV LISTE </span>
+      <span
+        v-if="true"
+        style="
+          font-style: italic;
+          font-weight: normal;
+          font-size: 14px;
+          text-align: right;
+        "
+        >Lista korisnika: IME KORISNIKA</span
+      >
     </div>
-    <button
-      v-show="!isExpanded"
-      class="toggle-button start-50 translate-middle"
-      @click="expand"
-    >
-      Vidi više
-    </button>
-    <button
-      v-show="isExpanded"
-      class="toggle-button start-50 translate-middle"
-      @click="expand"
-    >
-      Sakrij
-    </button>
+    <div class="p-2 pb-5 list-container">
+      <knjiga></knjiga>
+      <knjiga></knjiga>
+      <knjiga></knjiga>
+    </div>
+    <div class="hide-buttons">
+      <span
+        v-show="!isExpanded && shouldExpand"
+        class="toggle-button start-50 translate-middle clickable"
+        @click="expand"
+      >
+        Vidi više
+      </span>
+      <span
+        v-show="isExpanded"
+        class="toggle-button start-50 translate-middle clickable"
+        @click="expand"
+      >
+        Sakrij
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
+import Knjiga from "@/components/Knjiga.vue";
+
 export default {
   data() {
     return {
       isExpanded: false,
-      shouldShowExpandButton: false,
+      shouldExpand: false,
+      currentHeight: null,
+      setHeight: 300,
     };
   },
-  mounted() {},
+  components: {
+    Knjiga,
+  },
+  mounted() {
+    this.currentHeight = this.$el.scrollHeight;
+    if (this.currentHeight > this.setHeight) {
+      this.shouldExpand = true;
+    }
+  },
   methods: {
     expand() {
       this.isExpanded = !this.isExpanded;
@@ -60,8 +74,28 @@ export default {
 </script>
 
 <style scoped>
-.fading-bottom {
+.card-header {
+  font-weight: bold;
+  font-size: 20px;
 }
+.list-container {
+  background: #fffdeb;
+}
+.card {
+  --bs-card-cap-color: #424242;
+  --bs-card-cap-bg: #dfd9ab;
+}
+
+.hide-buttons {
+  font-size: 25px;
+  font-weight: bold;
+  transition: color 275ms linear;
+}
+
+.hide-buttons:hover {
+  color: #e91e63;
+}
+
 .height-check {
   max-height: 300px;
   overflow: hidden;
@@ -75,11 +109,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    to top,
-    rgba(241, 241, 241, 0.75),
-    rgba(255, 215, 216, 0)
-  );
+  background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
   pointer-events: none;
 }
 

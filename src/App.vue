@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="margin-bottom: 100px">
     <nav
       class="navbar navbar-expand-lg p-2 mb-4 border-bottom border-secondary rounded-bottom"
     >
@@ -14,9 +14,9 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#"
+      <router-link class="navbar-brand" to="/"
         ><img style="width: 100px" src="@/assets/knjigogram_logo.png"
-      /></a>
+      /></router-link>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -57,6 +57,20 @@
       </div>
     </nav>
     <router-view />
+    <div
+      class="m-t4 p-4 text-center border border-secondary rounded-top mobile-hidden"
+      style="
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 5px;
+        background-color: #dfd9ab;
+        color: #424242;
+        z-index: 999;
+      "
+    >
+      <p class="m-0">Andrija Bašan, 2023.</p>
+    </div>
   </div>
 </template>
 
@@ -75,6 +89,9 @@ export default {
 </script>
 
 <style lang="scss">
+input::placeholder {
+  opacity: 0.5;
+}
 :root {
   --bs-nav-link-font-size: 28px;
   --bs-nav-link-font-weight: bold;
@@ -87,6 +104,7 @@ $cgold: #ffd700;
 $cgreen: #4caf50;
 $crose: #e91e63;
 $cdgray: #424242;
+$primaryl: #fffdeb;
 
 .nav-link:focus {
   color: $crose;

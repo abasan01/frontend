@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 col-md-6 col-lg-3 p-2">
-    <div class="container border rounded" @click="pushRuta">
+    <div class="container border rounded clickable" @click="pushRuta">
       <div class="row">
         <div class="col-12 p-2">
           <div class="d-flex align-items-center justify-content-center">
@@ -14,10 +14,12 @@
           <div class="jumbotron jumbotron-fluid">
             <div class="container">
               <span class="title-style"
-                >NASLOV <span class="badge">ŽANR KAO TAKAV TU IDE</span></span
+                >{{ info.naslov }}
+                <span class="badge">{{ info.žanr }}</span></span
               >
               <div class="blockquote-footer mt-1">
-                OVDJE IDE AUTOR <cite title="Source Title">(GODINA)</cite>
+                {{ info.autor }}
+                <cite title="Source Title">({{ info.godina }})</cite>
               </div>
               <span>Napredak:</span>
               <div class="progress">
@@ -37,6 +39,7 @@
 <script>
 import router from "@/router";
 export default {
+  props: ["info"],
   data() {
     return {
       imageUrl: require("@/assets/placeholder.jpg"),

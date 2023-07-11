@@ -43,14 +43,20 @@
             >
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" @submit.prevent="setSearch()">
           <input
+            v-model="searchText"
             class="form-control mr-sm-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
+            @keydown.enter="setSearch()"
           />
-          <button class="btn btn-primary my-2 my-sm-0" type="submit">
+          <button
+            class="btn btn-primary my-2 my-sm-0"
+            type="submit"
+            @click="setSearch()"
+          >
             Search
           </button>
         </form>
@@ -75,13 +81,33 @@
 </template>
 
 <script>
+import store from "./store";
+
 export default {
   data() {
-    return {};
+    return { searchText: "" };
+  },
+  mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.searchText = urlParams.get("search");
   },
   methods: {
     logout() {
       console.log("test");
+    },
+    setSearch() {
+      const currentRoute = this.$route.path;
+      const search = this.searchText.trim();
+      if (currentRoute !== "/knjige") {
+        console.log("prvi if");
+        this.$router.push({ name: "knjige", query: { search: search } });
+      } else {
+        console.log("else");
+        this.$router
+          .replace({ query: search ? { search: search } : {} })
+          .catch(() => {});
+        this.$router.go(0);
+      }
     },
   },
   components: {},

@@ -3,7 +3,7 @@
     <div class="p-4">
       <form @submit.prevent="" class="mb-5 row d-flex justify-content-center">
         <div class="form-group m-2" style="width: 75%">
-          <label for="bookName">Naslov Knjige: </label>
+          <label for="bookName">Naslov knjige: </label>
           <input
             v-model="bookName"
             type="text"
@@ -23,6 +23,16 @@
               track-by="name"
             ></multiselect>
           </div>
+
+          <label for="bookName">Žanr knjige: </label>
+          <input
+            v-model="genreName"
+            type="text"
+            class="form-control m-2"
+            placeholder="Žanr knjige"
+            id="žanrName"
+            :title="'Unesite žanr knjige'"
+          />
 
           <label for="quantity">Godina izdanja:</label>
 
@@ -47,6 +57,7 @@
           type="submit"
           style="width: 25%"
           class="btn btn-lg btn-custom ml-2"
+          @click="addBook()"
         >
           Post image
         </button>
@@ -59,6 +70,7 @@
 
 <script>
 import Multiselect from "vue-multiselect";
+import { Knjige } from "@/services";
 
 export default {
   data: function () {
@@ -67,6 +79,7 @@ export default {
       errorState: false,
       bookName: "",
       authorName: "",
+      genreName: "",
       year: 0,
       options: [
         { name: "Albert Camus" },
@@ -79,7 +92,18 @@ export default {
   components: {},
   name: "Upload",
   mounted() {},
-  methods: {},
+  methods: {
+    addBook() {
+      let knjiga = {
+        naslov: this.bookName,
+        autor: this.authorName,
+        žanr: this.genreName,
+        godina: this.year,
+      };
+
+      Knjige.setBook(knjiga);
+    },
+  },
 };
 </script>
 

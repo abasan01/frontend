@@ -1,12 +1,12 @@
 <template>
   <div class="col-12 col-md-6 col-lg-3 p-2">
-    <div class="container border rounded clickable" @click="pushRuta">
+    <div class="container border rounded clickable" @click="pushRuta(info._id)">
       <div class="row">
         <div class="col-12 p-2">
           <div class="d-flex align-items-center justify-content-center">
             <div
               class="image-blurred-edge"
-              :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
+              :style="{ backgroundImage: 'url(' + info.imageUrl + ')' }"
             ></div>
           </div>
         </div>
@@ -47,8 +47,9 @@ export default {
   },
   mounted() {},
   methods: {
-    pushRuta() {
-      router.push({ name: "knjiga" });
+    pushRuta(passId) {
+      console.log(passId);
+      //router.push({ name: "knjiga" });
     },
   },
 };
@@ -82,8 +83,9 @@ export default {
 
 .image-blurred-edge {
   width: 200px;
-  height: 200px;
+  height: 250px;
   background-size: cover;
+  background-position: center;
   box-shadow: 0 0 4px 4px #fffdeb inset;
 }
 </style>

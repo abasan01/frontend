@@ -6,7 +6,7 @@
           <div class="d-flex align-items-center justify-content-center">
             <div
               class="image-blurred-edge"
-              :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
+              :style="{ backgroundImage: 'url(' + info.imageUrl + ')' }"
             ></div>
           </div>
         </div>
@@ -14,18 +14,20 @@
           <div class="jumbotron jumbotron-fluid">
             <div class="container">
               <span class="title-style"
-                >NASLOV <span class="badge">ŽANR KAO TAKAV TU IDE</span></span
+                >{{ info.title }}
+                <span class="badge">{{ info.genre }}</span></span
               >
               <div class="blockquote-footer mt-1">
-                OVDJE IDE AUTOR <cite title="Source Title">(GODINA)</cite>
+                {{ info.author }}
+                <cite title="Source Title">({{ info.year }})</cite>
               </div>
               <span>Napredak:</span>
               <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 50%">
-                  120/240
+                  {{ info.pages % 50 }}/{{ info.pages }}
                 </div>
               </div>
-              <p class="lead mt-4">OPIS KNJIGE KAO TAKVE</p>
+              <p class="lead mt-4">{{ info.description }}</p>
             </div>
           </div>
         </div>
@@ -45,7 +47,7 @@
         <div class="col-md-12 col-lg-9">
           <div class="jumbotron jumbotron-fluid">
             <div class="container">
-              <span class="title-style">IME I PREZIME AUTORA</span>
+              <span class="title-style">{{ info.author }}</span>
               <div class="blockquote-footer mt-1">GODINA ROĐENJA</div>
               <p class="lead mt-4">BIOGRAFIJA AUTORA</p>
             </div>
@@ -58,13 +60,14 @@
 
 <script>
 export default {
+  props: ["info"],
   data() {
     return {
       imageUrl: require("@/assets/placeholder.jpg"),
       authorUrl: require("@/assets/author-placeholder.png"),
     };
   },
-  mounted() {},
+  async mounted() {},
   methods: {
     expand() {},
   },

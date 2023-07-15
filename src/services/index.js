@@ -14,6 +14,12 @@ let Knjige = {
 
         return
     },
+    async getOne(id) {
+        let response = await Service.get(`/knjige/${id}`)
+        return response.data;
+
+
+    },
     async getAll(term) {
         let response = await Service.get(`/knjige?search=${term}`);
         let data = response.data

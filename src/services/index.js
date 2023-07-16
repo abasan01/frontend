@@ -2,7 +2,7 @@ import axios from 'axios'
 
 let Service = axios.create({
     baseURL: "http://localhost:3000",
-    timeout: 7000
+    timeout: 70000
 })
 
 let Knjige = {
@@ -10,15 +10,14 @@ let Knjige = {
 
         console.log("data: ", data)
 
-        await Service.post("/upload", data)
+        let response = await Service.post("/add", data)
 
-        return
+        return response.data
     },
     async getOne(id) {
+
         let response = await Service.get(`/knjige/${id}`)
         return response.data;
-
-
     },
     async getAll(term) {
         let response = await Service.get(`/knjige?search=${term}`);

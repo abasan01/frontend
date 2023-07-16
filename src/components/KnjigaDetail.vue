@@ -23,8 +23,12 @@
               </div>
               <span>Napredak:</span>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 50%">
-                  {{ info.pages % 50 }}/{{ info.pages }}
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  :style="{ width: (info.pages / 2 / info.pages) * 100 + '%' }"
+                >
+                  {{ info.pages / 2 }}/{{ info.pages }}
                 </div>
               </div>
               <p class="lead mt-4">{{ info.description }}</p>
@@ -63,11 +67,12 @@ export default {
   props: ["info"],
   data() {
     return {
-      imageUrl: require("@/assets/placeholder.jpg"),
       authorUrl: require("@/assets/author-placeholder.png"),
     };
   },
-  async mounted() {},
+  async mounted() {
+    console.log("Check!", this.info.author);
+  },
   methods: {
     expand() {},
   },

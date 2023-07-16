@@ -31,7 +31,7 @@
               <span>Napredak:</span>
               <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 50%">
-                  {{ info.pages % 50 }}/{{ info.pages }}
+                  {{ info.pages / 2 }}/{{ info.pages }}
                 </div>
               </div>
               <p class="lead mt-4">{{ info.description }}</p>

@@ -20,24 +20,24 @@
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
+          <li class="nav-item active" v-if="authenticated">
             <router-link class="nav-link" to="/">Glavna</router-link>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active" v-if="authenticated">
             <router-link class="nav-link" to="/knjige">Knjige</router-link>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active" v-if="authenticated">
             <router-link class="nav-link" to="/liste">Liste</router-link>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active" v-if="!authenticated">
             <router-link class="nav-link" to="/login">Ulogiraj se</router-link>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active" v-if="authenticated">
             <router-link class="nav-link" to="/upload"
               >Dodaj Knjige</router-link
             >
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active" v-if="authenticated">
             <span @click="logout()" class="nav-link clickable"
               >Odlogiraj se</span
             >
@@ -81,19 +81,21 @@
 </template>
 
 <script>
-import store from "./store";
+import { Auth } from "./services/index.js";
 
 export default {
   data() {
-    return { searchText: "" };
+    return { searchText: "", authenticated: null };
   },
-  mounted() {
+  async mounted() {
     const urlParams = new URLSearchParams(window.location.search);
     this.searchText = urlParams.get("search");
+    this.authenticated = !!Auth.getAuth();
   },
   methods: {
     logout() {
-      console.log("test");
+      Auth.logout();
+      this.$router.go();
     },
     setSearch() {
       const currentRoute = this.$route.path;

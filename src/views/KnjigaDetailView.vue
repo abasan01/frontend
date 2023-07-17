@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <KnjigaDetail :info="knjiga"></KnjigaDetail>
+    <KnjigaDetail imageurl="knjiga.imageurl" :info="knjiga"></KnjigaDetail>
   </div>
 </template>
 

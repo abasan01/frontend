@@ -66,7 +66,7 @@
                 <input
                   @keyup.enter="stateLS"
                   type="email"
-                  v-model="username"
+                  v-model="email"
                   id="email"
                   class="form-control form-control-lg"
                   placeholder="Unesite svoju e-mail adresu"
@@ -159,12 +159,13 @@
 </template>
 
 <script>
+import { Auth } from "@/services/index.js";
 export default {
   name: "Login",
   data() {
     return {
       name: "",
-      username: "",
+      email: "",
       password: "",
       passwordRepeat: "",
       state: true,
@@ -183,13 +184,24 @@ export default {
       if (this.state) return this.login();
       else return this.signup();
     },
-    async login() {},
-    test() {
-      db.collection("users").doc(this.username).set({
-        name: this.name,
-      });
+    async login() {
+      const success = await Auth.login(this.email, this.password);
+      if (success) {
+        this.$router.go();
+      } else {
+        this.errorState = true;
+        this.errorMessage = "Neuspiješno ulogiranje, probajte ponovno!";
+      }
     },
-    async signup() {},
+    async signup() {
+      const success = await Auth.signup(this.email, this.name, this.password);
+      if (success) {
+        this.login();
+      } else {
+        this.errorState = true;
+        this.errorMessage = "Krivi podaci, ili je zauzet email!";
+      }
+    },
     toggleLogin() {
       this.state = true;
       this.errorState = false;

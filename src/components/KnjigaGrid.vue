@@ -12,6 +12,7 @@
         <div class="col-12 p-2">
           <div class="d-flex align-items-center justify-content-center">
             <div
+              v-if="info.imageUrl"
               class="image-blurred-edge"
               :style="{ backgroundImage: 'url(' + info.imageUrl + ')' }"
             ></div>

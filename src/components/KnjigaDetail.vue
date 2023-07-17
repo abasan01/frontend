@@ -5,6 +5,7 @@
         <div class="col-md-12 col-lg-3 border-right-custom p-2">
           <div class="d-flex align-items-center justify-content-center">
             <div
+              v-if="info.imageUrl"
               class="image-blurred-edge"
               :style="{ backgroundImage: 'url(' + info.imageUrl + ')' }"
             ></div>
@@ -70,9 +71,7 @@ export default {
       authorUrl: require("@/assets/author-placeholder.png"),
     };
   },
-  async mounted() {
-    console.log("Check!", this.info.author);
-  },
+  async mounted() {},
   methods: {
     expand() {},
   },

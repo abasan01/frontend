@@ -1,5 +1,8 @@
 import axios from 'axios'
 import $router from "@/router"
+import {
+    error
+} from 'jquery';
 
 let Service = axios.create({
     baseURL: "http://localhost:3000",
@@ -17,9 +20,15 @@ Service.interceptors.request.use((request) => {
 
 
 Service.interceptors.response.use((response) => response, (err) => {
-    if (err.response.status == 401 || error.response.status == 403) {
+    console.log(err.response.status)
+    if (err.response.status == 401) {
+        return
+    }
+    if (err.response.status == 403) {
+        console.log("logout")
         Auth.logout();
         $router.go()
+        return
     }
 })
 
@@ -34,30 +43,45 @@ let Knjige = {
     },
     async getOne(id) {
 
-        let response = await Service.get(`/knjige/${id}`)
-        return response.data;
+        const response = await Service.get(`/knjige/${id}`)
+
+        if (response) {
+            return response.data;
+        } else {
+            console.error("Greška sa dobavljanjem")
+            return
+        }
+
     },
     async getAll(term) {
-        let response = await Service.get(`/knjige?search=${term}`);
-        let data = response.data
-        console.log(data)
+        const response = await Service.get(`/knjige?search=${term}`);
 
-        return data;
+        if (response) {
+            return response.data;
+        } else {
+            console.error("Greška sa dobavljanjem")
+            return
+        }
     }
 }
 
 let Auth = {
     async login(email, password) {
         try {
+            console.log("jel se ovo izvodi?")
             const response = await Service.post("/auth", {
                 email: email,
                 password: password,
             });
+            console.log("response: ", response)
+            if (response) {
 
-            const user = response.data
 
-            localStorage.setItem("user", JSON.stringify(user))
-            return true
+                const user = response.data
+
+                localStorage.setItem("user", JSON.stringify(user))
+                return true
+            } else return false
         } catch (e) {
             console.error(e)
             return false

@@ -43,7 +43,11 @@
             >
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" @submit.prevent="setSearch()">
+        <form
+          v-if="authenticated"
+          class="form-inline my-2 my-lg-0"
+          @submit.prevent="setSearch()"
+        >
           <input
             v-model="searchText"
             class="form-control mr-sm-2"

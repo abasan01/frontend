@@ -185,21 +185,32 @@ export default {
       else return this.signup();
     },
     async login() {
-      const success = await Auth.login(this.email, this.password);
-      if (success) {
-        this.$router.go();
+      if (this.email && this.password) {
+        const success = await Auth.login(this.email, this.password);
+        console.log("success: ", success);
+        if (success) {
+          this.$router.go();
+        } else {
+          this.errorState = true;
+          this.errorMessage = "Neuspiješno ulogiranje, probajte ponovno!";
+        }
       } else {
         this.errorState = true;
-        this.errorMessage = "Neuspiješno ulogiranje, probajte ponovno!";
+        this.errorMessage = "Ne smijete ostaviti prazna polja!";
       }
     },
     async signup() {
-      const success = await Auth.signup(this.email, this.name, this.password);
-      if (success) {
-        this.login();
+      if (this.email && this.name && this.password) {
+        const success = await Auth.signup(this.email, this.name, this.password);
+        if (success) {
+          this.login();
+        } else {
+          this.errorState = true;
+          this.errorMessage = "Krivi podaci, ili je zauzet email!";
+        }
       } else {
         this.errorState = true;
-        this.errorMessage = "Krivi podaci, ili je zauzet email!";
+        this.errorMessage = "Ne smijete ostaviti prazna polja!";
       }
     },
     toggleLogin() {

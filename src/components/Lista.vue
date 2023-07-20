@@ -1,6 +1,7 @@
 <template>
   <div
-    style="width: 90%"
+    v-if="info"
+    style="width: 90%; overflow-x: hidden"
     class="card my-2"
     :class="{
       expanded: isExpanded,
@@ -8,7 +9,7 @@
     }"
   >
     <div class="card-header row">
-      <span> NASLOV LISTE </span>
+      <span> {{ info.list.name }} </span>
       <span
         v-if="true"
         style="
@@ -17,13 +18,11 @@
           font-size: 14px;
           text-align: right;
         "
-        >Lista korisnika: IME KORISNIKA</span
+        >Lista korisnika: {{ info.list.createdBy }}</span
       >
     </div>
     <div class="p-2 pb-5 list-container">
-      <knjiga></knjiga>
-      <knjiga></knjiga>
-      <knjiga></knjiga>
+      <knjiga v-for="book in info.books" :key="book._id" :book="book"></knjiga>
     </div>
     <div class="hide-buttons">
       <span
@@ -48,18 +47,20 @@
 import Knjiga from "@/components/Knjiga.vue";
 
 export default {
+  props: ["info"],
   data() {
     return {
       isExpanded: false,
       shouldExpand: false,
       currentHeight: null,
-      setHeight: 300,
+      setHeight: 500,
     };
   },
   components: {
     Knjiga,
   },
   mounted() {
+    console.log(this.info);
     this.currentHeight = this.$el.scrollHeight;
     if (this.currentHeight > this.setHeight) {
       this.shouldExpand = true;
@@ -97,7 +98,7 @@ export default {
 }
 
 .height-check {
-  max-height: 300px;
+  max-height: 500px;
   overflow: hidden;
   position: relative;
 }

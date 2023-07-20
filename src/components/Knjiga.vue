@@ -1,11 +1,15 @@
 <template>
-  <div class="container border rounded my-2">
+  <div
+    v-if="book"
+    class="container border rounded my-2 clickable"
+    @click="pushRuta(book._id)"
+  >
     <div class="row">
       <div class="col-md-12 col-lg-3 border-right-custom p-2">
         <div class="d-flex align-items-center justify-content-center">
           <div
             class="image-blurred-edge"
-            :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
+            :style="{ backgroundImage: 'url(' + book.imageUrl + ')' }"
           ></div>
         </div>
       </div>
@@ -13,18 +17,27 @@
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
             <span class="title-style"
-              >NASLOV <span class="badge">ŽANR KAO TAKAV TU IDE</span></span
+              >{{ book.title }}
+              <span class="badge">{{ book.genre }}</span></span
             >
             <div class="blockquote-footer mt-1">
-              OVDJE IDE AUTOR <cite title="Source Title">(GODINA)</cite>
+              {{ book.author }}
+              <cite title="Source Title">({{ book.year }})</cite>
             </div>
-            <span>Napredak:</span>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 50%">
-                120/240
+            <div v-if="book.progress">
+              <span>Napredak:</span>
+              <div class="progress">
+                <div
+                  class="progress-bar clickable"
+                  role="progressbar"
+                  :style="{
+                    width: (book.progress / book.pages) * 100 + '%',
+                  }"
+                >
+                  {{ book.progress }}/{{ book.pages }}
+                </div>
               </div>
             </div>
-            <p class="lead mt-4">OPIS KNJIGE KAO TAKVE</p>
           </div>
         </div>
       </div>
@@ -34,6 +47,7 @@
 
 <script>
 export default {
+  props: ["book"],
   data() {
     return {
       imageUrl: require("@/assets/placeholder.jpg"),
@@ -41,7 +55,9 @@ export default {
   },
   mounted() {},
   methods: {
-    expand() {},
+    pushRuta(passId) {
+      this.$router.push({ name: "knjiga", params: { id: passId } });
+    },
   },
 };
 </script>

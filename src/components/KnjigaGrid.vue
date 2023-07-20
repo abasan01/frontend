@@ -2,11 +2,12 @@
   <div class="col-12 col-md-6 col-lg-3 p-2">
     <div
       class="container border rounded clickable"
-      @click="pushRuta(info._id)"
       :class="{
         expanded: isExpanded,
         'height-check': !isExpanded && shouldExpand,
+        selected: isSelected,
       }"
+      @click="addList(info._id, info.title)"
     >
       <div class="row">
         <div class="col-12 p-2">
@@ -29,11 +30,15 @@
                 {{ info.author }}
                 <cite title="Source Title">({{ info.year }})</cite>
               </div>
-              <span>Napredak:</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 50%">
-                  {{ info.pages / 2 }}/{{ info.pages }}
-                </div>
+              <div>
+                <button
+                  type="submit"
+                  style="width: 80%"
+                  class="btn btn-lg btn-custom ml-2"
+                  @click="pushRuta(info._id)"
+                >
+                  Više o knjizi
+                </button>
               </div>
               <p class="lead mt-4">{{ info.description }}</p>
             </div>
@@ -62,10 +67,13 @@
 
 <script>
 import router from "@/router";
+import store from "@/store";
 export default {
   props: ["info"],
   data() {
     return {
+      list: [],
+      isSelected: false,
       isExpanded: false,
       shouldExpand: false,
       currentHeight: null,
@@ -85,11 +93,30 @@ export default {
     pushRuta(passId) {
       this.$router.push({ name: "knjiga", params: { id: passId } });
     },
+    addList(id, bookTitle) {
+      if (store.list.includes(id)) {
+        const index = store.list.indexOf(id);
+        store.list.splice(index, 1);
+        store.listTitles.splice(index, 1);
+        this.isSelected = !this.isSelected;
+      } else {
+        store.list.push(id);
+        store.listTitles.push(bookTitle);
+        this.isSelected = !this.isSelected;
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+.btn-custom {
+  --bs-btn-color: #242424;
+  --bs-btn-bg: #dfd9ab;
+}
+.btn:hover {
+  background-color: #c7c08f;
+}
 .border {
   --bs-border-color: #424242;
 }
@@ -113,6 +140,10 @@ export default {
 }
 .lead {
   font-size: 1rem;
+}
+
+.selected {
+  border: 2px solid rgb(44, 143, 255) !important;
 }
 
 .image-blurred-edge {

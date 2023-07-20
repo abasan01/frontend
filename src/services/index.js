@@ -32,12 +32,38 @@ Service.interceptors.response.use((response) => response, (err) => {
     }
 })
 
+let Napretci = {
+    async addProgress(id, data) {
+        const response = await Service.post(`/knjige/${id}`, data)
+        return response.data
+    },
+    async changeProgress(id, data) {
+        const response = await Service.patch(`/knjige/${id}`, data)
+        return response.data
+    },
+}
+
+let Liste = {
+    async getUserLists() {
+        const response = await Service.get("/")
+        return response.data
+    },
+    async getPublicLists() {
+        const response = await Service.get("/liste")
+        return response.data
+    },
+    async addList(data) {
+        const response = await Service.post("/liste", data)
+        return response.data
+    }
+}
+
 let Knjige = {
     async setBook(data) {
 
         console.log("data: ", data)
 
-        let response = await Service.post("/add", data)
+        const response = await Service.post("/add", data)
 
         return response.data
     },
@@ -120,5 +146,7 @@ let Auth = {
 export {
     Service,
     Knjige,
-    Auth
+    Auth,
+    Liste,
+    Napretci
 }

@@ -7,6 +7,7 @@
 <script>
 import KnjigaDetail from "@/components/KnjigaDetail.vue";
 import { Knjige } from "@/services/index";
+import store from "@/store";
 
 export default {
   data() {
@@ -15,8 +16,8 @@ export default {
     };
   },
   async mounted() {
-    const id = this.$route.params.id;
-    this.knjiga = await Knjige.getOne(id);
+    store.id = this.$route.params.id;
+    this.knjiga = await Knjige.getOne(store.id);
   },
   name: "KnjigeDetailView",
   components: {

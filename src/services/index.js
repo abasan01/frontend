@@ -5,7 +5,7 @@ import {
 } from 'jquery';
 
 let Service = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://knjigogrambackend-iku5.onrender.com",
     timeout: 70000
 })
 

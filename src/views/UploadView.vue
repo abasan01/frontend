@@ -25,7 +25,7 @@
           class="btn btn-lg btn-custom ml-2"
           @click="addBook()"
         >
-          Post image
+          Dodaj knjigu
         </button>
       </form>
 
@@ -81,6 +81,12 @@ export default {
   async mounted() {},
   methods: {
     async addBook() {
+      if (!this.bookName) {
+        (this.errorState = true),
+          (this.errorMessage = "Ne smijete imati prazno polje!");
+      } else {
+        (this.errorState = false), (this.errorMessage = "");
+      }
       const knjiga = {
         title: this.bookName,
       };

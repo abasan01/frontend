@@ -55,6 +55,15 @@ let Liste = {
     async addList(data) {
         const response = await Service.post("/liste", data)
         return response.data
+    },
+    async patchList(data) {
+        const response = await Service.patch("/liste", data)
+        return response.data
+    },
+    async deleteList(id) {
+        console.log(id)
+        const response = await Service.delete(`/liste?delete=${id}`)
+        return response.data
     }
 }
 

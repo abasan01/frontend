@@ -1,5 +1,6 @@
     export default {
         list: [],
         listTitles: [],
-        id: null
+        id: null,
+        currentUser: ""
     }

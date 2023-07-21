@@ -7,24 +7,31 @@
         :info="book"
       ></KnjigaGrid>
     </div>
-    <button
+    <img
+      src="@/assets/arrow-menu.png"
       v-if="store.list.length"
-      class="btn btn-primary fixed-box"
+      class="fixed-box clickable"
+      style="width: 50px"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#offcanvasRight"
       aria-controls="offcanvasRight"
-    >
-      <strong>Lista</strong>
-    </button>
+    />
     <div
       class="offcanvas offcanvas-end"
       tabindex="-1"
       id="offcanvasRight"
       aria-labelledby="offcanvasRightLabel"
     >
-      <div class="offcanvas-header">
+      <div class="offcanvas-header" style="background-color: #dfd9ab">
         <h5 id="offcanvasRightLabel">Vaša lista knjiga:</h5>
+
+        <input
+          v-model="listTitle"
+          class="form-control mr-sm-2"
+          placeholder="Unesite Naziv Liste"
+          required
+        />
         <button
           type="button"
           class="btn-close text-reset"
@@ -32,9 +39,9 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body bg-primary">
         <p v-for="title in store.listTitles" :key="title">{{ title }}</p>
-        <button type="button" @click="postList()">
+        <button type="submit" class="btn btn-custom" @click="postList()">
           <strong>Napravi novu listu</strong>
         </button>
       </div>
@@ -44,7 +51,7 @@
 
 <script>
 import KnjigaGrid from "@/components/KnjigaGrid.vue";
-import { Service, Knjige, Liste } from "@/services/index";
+import { Knjige, Liste } from "@/services/index";
 import store from "@/store";
 
 export default {
@@ -52,6 +59,7 @@ export default {
     return {
       store: store,
       books: [],
+      listTitle: "",
     };
   },
   mounted() {
@@ -64,7 +72,10 @@ export default {
   },
   methods: {
     async postList() {
-      await Liste.addList({ name: "test", books: store.list });
+      if (!this.listTitle) {
+        this.listTitle = "Lista";
+      }
+      await Liste.addList({ name: this.listTitle, books: store.list });
       this.$router.go();
     },
     async getPosts(searchTerm) {
@@ -84,13 +95,21 @@ export default {
 </script>
 
 <style scoped>
+input::placeholder {
+  opacity: 0.5;
+}
+.btn-custom {
+  --bs-btn-color: #242424;
+  --bs-btn-bg: #dfd9ab;
+}
+.btn:hover {
+  background-color: #c7c08f;
+}
 .fixed-box {
   position: fixed;
   top: 50%;
   right: -1px;
   transform: translateY(-50%);
-  background-color: #dfd9ab;
-  border: 1px solid #424242;
   z-index: 999;
 }
 </style>

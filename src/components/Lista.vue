@@ -9,7 +9,74 @@
     }"
   >
     <div class="card-header row">
-      <span> {{ info.list.name }} </span>
+      <!-- Button trigger modal -->
+      <div
+        class="col-3"
+        v-if="info.list.createdBy == store.currentUser && $route.name == 'home'"
+      >
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        ></button>
+      </div>
+      <div
+        class="col-3 offset-6 form-check form-switch mb-1"
+        v-if="info.list.createdBy == store.currentUser && $route.name == 'home'"
+      >
+        <input
+          class="form-check-input"
+          type="checkbox"
+          :disabled="checkSwitch"
+          @click="changePublic(info.list._id, info.list.public)"
+          :checked="info.list.public"
+        />
+        <label v-if="currentPublic" class="form-check-label">Javno</label>
+        <label v-if="!currentPublic" class="form-check-label">Privatno</label>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content bg-primary">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Želite li obrisati ovu listu?
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Odustani
+              </button>
+              <button
+                @click="deleteList(info.list._id)"
+                type="button"
+                class="btn btn-danger"
+              >
+                Obriši
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <span class="mb-2"> {{ info.list.name }} </span>
       <span
         v-if="true"
         style="
@@ -45,6 +112,8 @@
 
 <script>
 import Knjiga from "@/components/Knjiga.vue";
+import store from "@/store";
+import { Liste } from "@/services";
 
 export default {
   props: ["info"],
@@ -54,13 +123,16 @@ export default {
       shouldExpand: false,
       currentHeight: null,
       setHeight: 500,
+      store,
+      checkSwitch: false,
+      currentPublic: false,
     };
   },
   components: {
     Knjiga,
   },
   mounted() {
-    console.log(this.info);
+    this.currentPublic = this.info.list.public;
     this.currentHeight = this.$el.scrollHeight;
     if (this.currentHeight > this.setHeight) {
       this.shouldExpand = true;
@@ -70,11 +142,40 @@ export default {
     expand() {
       this.isExpanded = !this.isExpanded;
     },
+    async deleteList(id) {
+      console.log(id);
+      const currentRoute = this.$route.path;
+      this.$router.push({ query: { delete: id } });
+      const urlParams = new URLSearchParams(window.location.search);
+      const deleteId = urlParams.get("delete");
+      await Liste.deleteList(deleteId);
+      this.$router.push({ path: currentRoute });
+      window.location.reload();
+    },
+    async changePublic(id, state) {
+      this.checkSwitch = true;
+      this.currentPublic = !this.currentPublic;
+      console.log(id, state);
+      await Liste.patchList({ id: id, state: state });
+      this.$router.go();
+    },
   },
 };
 </script>
 
 <style scoped>
+.form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-custom {
+  --bs-btn-color: #242424;
+  --bs-btn-bg: #dfd9ab;
+}
+.btn:hover {
+  background-color: #c7c08f;
+}
 .card-header {
   font-weight: bold;
   font-size: 20px;

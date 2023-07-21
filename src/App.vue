@@ -86,6 +86,7 @@
 
 <script>
 import { Auth } from "./services/index.js";
+import store from "./store";
 
 export default {
   data() {
@@ -95,6 +96,8 @@ export default {
     const urlParams = new URLSearchParams(window.location.search);
     this.searchText = urlParams.get("search");
     this.authenticated = !!Auth.getAuth();
+    store.currentUser = JSON.parse(Auth.getAuth()).email;
+    console.log("store.currentUser: ", store.currentUser);
   },
   methods: {
     logout() {

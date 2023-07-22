@@ -39,7 +39,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body bg-primary">
+      <div class="offcanvas-body bg-custom">
         <p v-for="title in store.listTitles" :key="title">{{ title }}</p>
         <button type="submit" class="btn btn-custom" @click="postList()">
           <strong>Napravi novu listu</strong>
@@ -95,8 +95,8 @@ export default {
 </script>
 
 <style scoped>
-.bg-primary {
-  background: #fffbd8;
+.bg-custom {
+  background: #fffbd8 !important;
 }
 
 input::placeholder {

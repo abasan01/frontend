@@ -233,10 +233,10 @@ export default {
   }
 }
 .btn-custom {
-  --bs-btn-color: #242424;
-  --bs-btn-bg: #dfd9ab;
+  color: #242424;
+  background: #dfd9ab;
 }
-.btn:hover {
+.btn-custom:hover {
   background-color: #c7c08f;
 }
 
@@ -251,5 +251,9 @@ input {
 
 input::placeholder {
   opacity: 0.5;
+}
+
+body {
+  background: #fffbd8 !important;
 }
 </style>

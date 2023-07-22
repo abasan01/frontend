@@ -95,12 +95,16 @@ export default {
 </script>
 
 <style scoped>
+.bg-primary {
+  background: #fffbd8;
+}
+
 input::placeholder {
   opacity: 0.5;
 }
 .btn-custom {
-  --bs-btn-color: #242424;
-  --bs-btn-bg: #dfd9ab;
+  color: #242424;
+  background-color: #dfd9ab;
 }
 .btn:hover {
   background-color: #c7c08f;

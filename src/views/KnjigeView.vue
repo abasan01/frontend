@@ -103,8 +103,8 @@ input::placeholder {
   opacity: 0.5;
 }
 .btn-custom {
-  color: #242424;
-  background-color: #dfd9ab;
+  color: #242424 !important;
+  background-color: #dfd9ab !important;
 }
 .btn:hover {
   background-color: #c7c08f;

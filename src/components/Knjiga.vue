@@ -69,7 +69,8 @@ export default {
 .border-right-custom {
   border-right: 1px solid #424242;
 }
-.progress {
+
+.progress-bar {
   background-color: #dfd9ab !important;
   color: #424242 !important;
 }

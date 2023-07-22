@@ -56,11 +56,7 @@
             aria-label="Search"
             @keydown.enter="setSearch()"
           />
-          <button
-            class="btn btn-primary my-2 my-sm-0"
-            type="submit"
-            @click="setSearch()"
-          >
+          <button class="btn my-2 my-sm-0" type="submit" @click="setSearch()">
             Search
           </button>
         </form>
@@ -171,6 +167,6 @@ nav {
 }
 
 body {
-  background: #fffbd8;
+  background: #fffbd8 !important;
 }
 </style>

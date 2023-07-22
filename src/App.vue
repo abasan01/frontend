@@ -145,7 +145,7 @@ $primaryl: #fffdeb;
   color: $crose;
 }
 
-.form-control {
+input {
   background-color: #fffbd8;
   color: #424242;
   border: 1px solid #424242;
@@ -184,6 +184,6 @@ nav {
 }
 
 body {
-  background: #fffbd8;
+  background: #fffbd8 !important;
 }
 </style>

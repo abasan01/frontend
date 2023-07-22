@@ -143,8 +143,6 @@ $primaryl: #fffdeb;
   cursor: pointer;
 }
 
-@import "../scss/custom.scss";
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -159,15 +157,10 @@ nav {
 
   a {
     font-weight: bold;
-    color: $secondary;
 
     &.router-link-exact-active {
       color: $crose !important;
     }
   }
-}
-
-body {
-  background: $primary;
 }
 </style>

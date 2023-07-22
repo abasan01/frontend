@@ -4,6 +4,7 @@ import router from './router'
 import moment from 'moment/moment'
 import Multiselect from 'vue-multiselect'
 import "@/stylesheet/multiselect.css";
+import "../scss/custom.scss"
 
 Vue.config.productionTip = false
 Vue.component('multiselect', Multiselect)

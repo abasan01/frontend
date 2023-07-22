@@ -127,13 +127,7 @@ export default {
 input::placeholder {
   opacity: 0.5;
 }
-:root {
-  --bs-nav-link-font-size: 28px;
-  --bs-nav-link-font-weight: bold;
-}
 
-$primary: #fffbd8;
-$secondary: #424242;
 $ccream: #dfd9ab;
 $cgold: #ffd700;
 $cgreen: #4caf50;
@@ -143,16 +137,6 @@ $primaryl: #fffdeb;
 
 .nav-link:focus {
   color: $crose;
-}
-
-.form-control {
-  --bs-body-bg: #fffbd8;
-  --bs-body-color: #424242;
-  --bs-border-color: #424242;
-}
-
-.btn {
-  --bs-btn-bg: #fffbd8;
 }
 
 .clickable {

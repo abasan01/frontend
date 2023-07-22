@@ -135,12 +135,13 @@ export default {
   background-size: cover;
   box-shadow: 0 0 4px 4px #fffdeb inset;
 }
+
 .btn-custom {
-  --bs-btn-color: #242424;
-  --bs-btn-bg: #dfd9ab;
+  color: #242424 !important;
+  background-color: #dfd9ab !important;
 }
 .btn:hover {
-  background-color: #c7c08f;
+  background-color: #c7c08f !important;
 }
 
 input {

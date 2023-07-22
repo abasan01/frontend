@@ -164,11 +164,11 @@ export default {
 
 <style scoped>
 .btn-custom {
-  --bs-btn-color: #242424;
-  --bs-btn-bg: #dfd9ab;
+  color: #242424 !important;
+  background-color: #dfd9ab !important;
 }
 .btn:hover {
-  background-color: #c7c08f;
+  background-color: #c7c08f !important;
 }
 .border {
   --bs-border-color: #424242;

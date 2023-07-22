@@ -232,12 +232,13 @@ export default {
     height: 100vh;
   }
 }
+
 .btn-custom {
-  color: #242424;
-  background: #dfd9ab;
+  color: #242424 !important;
+  background-color: #dfd9ab !important;
 }
-.btn-custom:hover {
-  background-color: #c7c08f;
+.btn:hover {
+  background-color: #c7c08f !important;
 }
 
 .btn:disabled {

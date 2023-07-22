@@ -169,12 +169,8 @@ export default {
   border-color: #0d6efd;
 }
 
-.btn-custom {
-  --bs-btn-color: #242424;
-  --bs-btn-bg: #dfd9ab;
-}
 .btn:hover {
-  background-color: #c7c08f;
+  background-color: #c7c08f !important;
 }
 .card-header {
   font-weight: bold;

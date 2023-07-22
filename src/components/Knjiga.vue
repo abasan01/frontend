@@ -70,6 +70,11 @@ export default {
   border-right: 1px solid #424242;
 }
 
+card-header {
+  background-color: #dfd9ab !important;
+  color: #424242 !important;
+}
+
 .progress-bar {
   background-color: #dfd9ab !important;
   color: #424242 !important;

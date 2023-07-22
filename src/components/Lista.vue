@@ -165,8 +165,12 @@ export default {
 
 <style scoped>
 .form-check-input:checked {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
+.form-check-input {
+  background-color: #fffdeb !important;
 }
 
 .btn:hover {

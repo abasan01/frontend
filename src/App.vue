@@ -141,6 +141,11 @@ $primaryl: #fffdeb;
   border: 1px solid #424242 !important;
 }
 
+.card-header {
+  background-color: #dfd9ab !important;
+  color: #424242 !important;
+}
+
 input {
   background-color: #fffbd8 !important;
   color: #424242 !important;

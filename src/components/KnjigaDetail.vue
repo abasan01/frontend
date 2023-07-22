@@ -36,7 +36,7 @@
                 <form
                   v-show="hideProgress"
                   class="form-inline my-2 my-lg-0"
-                  @submit.prevent
+                  @submit.prevent="addProgress()"
                 >
                   <input
                     required
@@ -52,7 +52,7 @@
                     type="submit"
                     @click="addProgress()"
                   >
-                    Search
+                    Dodaj napredak
                   </button>
                 </form>
               </div>
@@ -68,7 +68,7 @@
                     required
                   />
                   <button class="btn btn-custom my-2 my-sm-0" type="submit">
-                    Search
+                    Dodaj napredak
                   </button>
                 </form>
                 <div

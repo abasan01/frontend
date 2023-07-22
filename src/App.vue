@@ -56,7 +56,11 @@
             aria-label="Search"
             @keydown.enter="setSearch()"
           />
-          <button class="btn my-2 my-sm-0" type="submit" @click="setSearch()">
+          <button
+            class="btn btn-primary my-2 my-sm-0"
+            type="submit"
+            @click="setSearch()"
+          >
             Search
           </button>
         </form>
@@ -123,11 +127,13 @@ export default {
 input::placeholder {
   opacity: 0.5;
 }
-
-.btn {
-  background-color: #dfd9ab;
+:root {
+  --bs-nav-link-font-size: 28px;
+  --bs-nav-link-font-weight: bold;
 }
 
+$primary: #fffbd8;
+$secondary: #424242;
 $ccream: #dfd9ab;
 $cgold: #ffd700;
 $cgreen: #4caf50;
@@ -139,9 +145,20 @@ $primaryl: #fffdeb;
   color: $crose;
 }
 
+.form-control {
+  background-color: #fffbd8;
+  color: #424242;
+  border: 1px solid #424242;
+}
+
+.btn {
+  --bs-btn-bg: #fffbd8;
+}
+
 .clickable {
   cursor: pointer;
 }
+
 @import "../scss/custom.scss";
 
 #app {
@@ -154,11 +171,11 @@ $primaryl: #fffdeb;
 
 nav {
   padding: 30px;
-  background: $ccream;
+  background: #dfd9ab;
 
   a {
     font-weight: bold;
-    color: $secondary;
+    color: #424242;
 
     &.router-link-exact-active {
       color: $crose !important;
@@ -167,6 +184,6 @@ nav {
 }
 
 body {
-  background: #fffbd8 !important;
+  background: #fffbd8;
 }
 </style>

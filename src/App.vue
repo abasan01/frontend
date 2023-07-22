@@ -123,10 +123,6 @@ export default {
 input::placeholder {
   opacity: 0.5;
 }
-:root {
-  --bs-nav-link-font-size: 28px;
-  --bs-nav-link-font-weight: bold;
-}
 
 $primary: #fffbd8;
 $secondary: #424242;
@@ -142,17 +138,17 @@ $primaryl: #fffdeb;
 }
 
 .border-secondary {
-  border: 1px solid #424242;
+  border: 1px solid #424242 !important;
 }
 
 input {
-  background-color: #fffbd8;
-  color: #424242;
-  border: 1px solid #424242;
+  background-color: #fffbd8 !important;
+  color: #424242 !important;
+  border: 1px solid #424242 !important;
 }
 
 .btn {
-  --bs-btn-bg: #fffbd8;
+  background-color: #fffbd8 !important;
 }
 
 .clickable {

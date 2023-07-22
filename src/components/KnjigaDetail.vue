@@ -171,14 +171,15 @@ export default {
   background-color: #c7c08f !important;
 }
 .border {
-  --bs-border-color: #424242;
+  border: 1px solid #424242 !important;
 }
 .border-right-custom {
   border-right: 1px solid #424242;
 }
-.progress {
-  --bs-progress-bar-bg: #dfd9ab;
-  --bs-progress-bar-color: #424242;
+
+.progress-bar {
+  background-color: #dfd9ab !important;
+  color: #424242 !important;
 }
 .badge {
   color: #424242;

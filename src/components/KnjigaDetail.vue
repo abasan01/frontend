@@ -39,13 +39,13 @@
                   @submit.prevent="addProgress()"
                 >
                   <input
-                    required
                     class="m-2"
                     v-model="sendPage"
                     type="number"
                     :min="1"
                     :max="info.book.pages"
                     :title="'Unesite na kojoj ste stranici trenutno'"
+                    required
                   />
                   <button
                     class="btn btn-custom my-2 my-sm-0"
@@ -147,15 +147,19 @@ export default {
   async mounted() {},
   methods: {
     async addProgress() {
-      if (store.id && this.sendPage) {
+      if (store.id && this.sendPage && 0 < this.sendPage < this.info.pages) {
         await Napretci.addProgress(store.id, { progress: this.sendPage });
         this.$router.go();
+      } else {
+        return false;
       }
     },
     async changeProgress() {
-      if (store.id && this.sendPage) {
+      if (store.id && this.sendPage && 0 < this.sendPage < this.info.pages) {
         await Napretci.changeProgress(store.id, { progress: this.sendPage });
         this.$router.go();
+      } else {
+        return false;
       }
     },
   },

@@ -128,6 +128,10 @@ input::placeholder {
   opacity: 0.5;
 }
 
+.btn {
+  background-color: #dfd9ab;
+}
+
 $ccream: #dfd9ab;
 $cgold: #ffd700;
 $cgreen: #4caf50;
@@ -142,6 +146,7 @@ $primaryl: #fffdeb;
 .clickable {
   cursor: pointer;
 }
+@import "../scss/custom.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -157,10 +162,15 @@ nav {
 
   a {
     font-weight: bold;
+    color: $secondary;
 
     &.router-link-exact-active {
       color: $crose !important;
     }
   }
+}
+
+body {
+  background: #fffbd8;
 }
 </style>

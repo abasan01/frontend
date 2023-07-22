@@ -56,11 +56,7 @@
             aria-label="Search"
             @keydown.enter="setSearch()"
           />
-          <button
-            class="btn btn-primary my-2 my-sm-0"
-            type="submit"
-            @click="setSearch()"
-          >
+          <button class="btn my-2 my-sm-0" type="submit" @click="setSearch()">
             Search
           </button>
         </form>
@@ -143,6 +139,10 @@ $primaryl: #fffdeb;
 
 .nav-link:focus {
   color: $crose;
+}
+
+.border-secondary {
+  border: 1px solid #424242;
 }
 
 input {

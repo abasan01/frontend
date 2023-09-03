@@ -147,15 +147,37 @@ export default {
   async mounted() {},
   methods: {
     async addProgress() {
-      if (store.id && this.sendPage && 0 < this.sendPage < this.info.pages) {
+      console.log(
+        "addProgress\nstore.id: ",
+        store.id,
+        " sendpage: ",
+        this.sendPage,
+        " info.pages: ",
+        this.info.book.pages
+      );
+      console.log(
+        "(store.id && this.sendPage && 0 < this.sendPage < this.info.pages): ",
+        store.id && this.sendPage && 0 < this.sendPage < this.info.pages
+      );
+      if (
+        store.id &&
+        this.sendPage &&
+        0 < this.sendPage < this.info.book.pages
+      ) {
+        console.log("Napretci kreće");
         await Napretci.addProgress(store.id, { progress: this.sendPage });
+        console.log("Napretci done");
         this.$router.go();
       } else {
         return false;
       }
     },
     async changeProgress() {
-      if (store.id && this.sendPage && 0 < this.sendPage < this.info.pages) {
+      if (
+        store.id &&
+        this.sendPage &&
+        0 < this.sendPage < this.info.book.pages
+      ) {
         await Napretci.changeProgress(store.id, { progress: this.sendPage });
         this.$router.go();
       } else {

@@ -157,7 +157,7 @@ export default {
       );
       console.log(
         "(store.id && this.sendPage && 0 < this.sendPage < this.info.pages): ",
-        store.id && this.sendPage && 0 < this.sendPage < this.info.pages
+        store.id && this.sendPage && 0 < this.sendPage < this.info.book.pages
       );
       if (
         store.id &&
